@@ -6,11 +6,11 @@ int chargeRateIsOk(float);
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
  int ret_batt_stat=1;
- if(temperatureRangeIsOk(temperature))!=True)
+ if(temperatureRangeIsOk(temperature)!=TRUE)
    return ret_batt_stat;
- else if(SocIsOk(soc))!=True)
+ else if(SocIsOk(soc)!=TRUE)
     return ret_batt_stat;
- else if(chargeRateIsOk(chargeRate))!=True)
+ else if(chargeRateIsOk(chargeRate)!=TRUE)
     return ret_batt_stat;
   return ret_batt_stat;
 }
@@ -39,7 +39,7 @@ int SocIsOk(float soc)
        printf("Soc is lesser than minimum and is out of range!\n");
        soc_stat=0;
    }
-  else if(temperature > 80) 
+  else if(soc > 80) 
    {
        printf("Soc is greater than maximum and is out of range!\n");
        soc_stat=0;
