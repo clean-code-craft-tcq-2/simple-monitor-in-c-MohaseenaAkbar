@@ -6,11 +6,11 @@ int chargeRateIsOk(float);
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
  int ret_batt_stat=1;
- if(temperatureRangeIsOk(temperature)!=TRUE)
+ if(temperatureRangeIsOk(temperature)!=1)
    return ret_batt_stat;
- else if(SocIsOk(soc)!=TRUE)
+ else if(SocIsOk(soc)!=1)
     return ret_batt_stat;
- else if(chargeRateIsOk(chargeRate)!=TRUE)
+ else if(chargeRateIsOk(chargeRate)!=1)
     return ret_batt_stat;
   return ret_batt_stat;
 }
@@ -60,8 +60,9 @@ int chargeRateIsOk(float chargeRate)
   
 int main() {
  int Batt_Stat;
- Batt_Stat=batteryIsOk(25, 70, 0.7)
+ //float (*Temperature_Check)(float)=temperatureRangeIsOk;
+ Batt_Stat=batteryIsOk(25, 70, 0.7);
  assert(Batt_Stat==1);
- Batt_Stat=batteryIsOk(50, 85, 0)
- assert(Batt_Stat==0);
+ Batt_Stat=batteryIsOk(50, 85, 0);
+ assert(Batt_Stat==1);
  }
