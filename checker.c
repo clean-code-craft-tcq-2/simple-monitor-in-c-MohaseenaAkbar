@@ -59,6 +59,9 @@ int chargeRateIsOk(float chargeRate)
 }
   
 int main() {
-  assert(batteryIsOk(25, 70, 0.7));
-  assert(!batteryIsOk(50, 85, 0));
-}
+ int Batt_Stat;
+ Batt_Stat=batteryIsOk(25, 70, 0.7)
+ assert(Batt_Stat==1);
+ Batt_Stat=batteryIsOk(50, 85, 0)
+ assert(Batt_Stat==0);
+ }
