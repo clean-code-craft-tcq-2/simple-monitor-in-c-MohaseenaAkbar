@@ -1,17 +1,26 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
 #include <stdio.h>
 #include <assert.h>
 int temperatureRangeIsOk(float);
 int SocIsOk(float);
 int chargeRateIsOk(float);
 
-int batteryIsOk(int (*Temperature_Check)(float), float soc, float chargeRate) {
- int ret_batt_stat=1;
- if(Temperature_Check!=1)
-   return ret_batt_stat;
- else if(SocIsOk(soc)!=1)
-    return ret_batt_stat;
- else if(chargeRateIsOk(chargeRate)!=1)
-    return ret_batt_stat;
+int batteryIsOk(int (*Batt_Chek[])(float),float *array) {
+int ret_batt_stat=1;
+int i;
+
+ for(i=0;i<3;i++)
+ {
+    if(Batt_Chek[i](array[i])!=1)
+     return ret_batt_stat;
+ }
   return ret_batt_stat;
 }
 
@@ -60,9 +69,11 @@ int chargeRateIsOk(float chargeRate)
   
 int main() {
  int Batt_Stat;
- int (*Temperature_Check)(float)=temperatureRangeIsOk;
- Batt_Stat=batteryIsOk((Temperature_Check)(25), 70, 0.7);
+ int (*Batt_Chek[3])(float);
+ Batt_Chek[0]=temperatureRangeIsOk;
+ Batt_Chek[1]=SocIsOk;
+ Batt_Chek[2]=chargeRateIsOk;
+ float array[3]={2,90,0.9};
+ Batt_Stat=batteryIsOk(Batt_Chek,array);
  assert(Batt_Stat==1);
- Batt_Stat=batteryIsOk((Temperature_Check)(50), 85, 0);
- assert(Batt_Stat==1);
- }
+  }
