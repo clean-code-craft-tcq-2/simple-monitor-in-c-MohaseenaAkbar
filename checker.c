@@ -62,10 +62,7 @@ int chargeRateIsOk(float chargeRate)
   
 int main() {
  int Batt_Stat;
- int (*Batt_Chek[3])(float);
- Batt_Chek[0]=temperatureRangeIsOk;
- Batt_Chek[1]=SocIsOk;
- Batt_Chek[2]=chargeRateIsOk;
+ int (*Batt_Chek[])(float)={temperatureRangeIsOk,SocIsOk,chargeRateIsOk};
  float BMS_Input[3]={2,90,0.9};
  Batt_Stat=batteryIsOk(Batt_Chek,BMS_Input,3);
  assert(Batt_Stat!=1);
