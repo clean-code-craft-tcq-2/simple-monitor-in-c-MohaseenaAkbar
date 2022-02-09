@@ -12,7 +12,7 @@ int batteryIsOk(int (*Batt_Chek[])(float),float *BMS_Input,int NoOfCheck)
    for(i=0;i<NoOfCheck;i++)
    {
       if(Batt_Chek[i](BMS_Input[i])!=1)
-      return ret_batt_stat;
+      ret_batt_stat=0;
    }
   return ret_batt_stat;
 }
@@ -68,5 +68,5 @@ int main() {
  Batt_Chek[2]=chargeRateIsOk;
  float BMS_Input[3]={2,90,0.9};
  Batt_Stat=batteryIsOk(Batt_Chek,BMS_Input,3);
- assert(Batt_Stat==1);
-  }
+ assert(Batt_Stat!=1);
+ }
