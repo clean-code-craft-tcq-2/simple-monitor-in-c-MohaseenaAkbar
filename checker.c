@@ -1,26 +1,19 @@
-/******************************************************************************
-
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
-Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
 #include <stdio.h>
 #include <assert.h>
 int temperatureRangeIsOk(float);
 int SocIsOk(float);
 int chargeRateIsOk(float);
 
-int batteryIsOk(int (*Batt_Chek[])(float),float *array) {
-int ret_batt_stat=1;
-int i;
+int batteryIsOk(int (*Batt_Chek[])(float),float *BMS_Input,int NoOfCheck) 
+{
+ int ret_batt_stat=1;
+ int i;
 
- for(i=0;i<3;i++)
- {
-    if(Batt_Chek[i](array[i])!=1)
-     return ret_batt_stat;
- }
+   for(i=0;i<NoOfCheck;i++)
+   {
+      if(Batt_Chek[i](BMS_Input[i])!=1)
+      return ret_batt_stat;
+   }
   return ret_batt_stat;
 }
 
@@ -73,7 +66,7 @@ int main() {
  Batt_Chek[0]=temperatureRangeIsOk;
  Batt_Chek[1]=SocIsOk;
  Batt_Chek[2]=chargeRateIsOk;
- float array[3]={2,90,0.9};
- Batt_Stat=batteryIsOk(Batt_Chek,array);
+ float BMS_Input[3]={2,90,0.9};
+ Batt_Stat=batteryIsOk(Batt_Chek,BMS_Input,3);
  assert(Batt_Stat==1);
   }
