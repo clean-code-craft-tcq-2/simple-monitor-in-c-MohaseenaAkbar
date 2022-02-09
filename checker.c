@@ -4,9 +4,9 @@ int temperatureRangeIsOk(float);
 int SocIsOk(float);
 int chargeRateIsOk(float);
 
-int batteryIsOk(float temperature, float soc, float chargeRate) {
+int batteryIsOk(int (*Temperature_Check)(float), float soc, float chargeRate) {
  int ret_batt_stat=1;
- if(temperatureRangeIsOk(temperature)!=1)
+ if(Temperature_Check!=1)
    return ret_batt_stat;
  else if(SocIsOk(soc)!=1)
     return ret_batt_stat;
@@ -60,9 +60,9 @@ int chargeRateIsOk(float chargeRate)
   
 int main() {
  int Batt_Stat;
- //float (*Temperature_Check)(float)=temperatureRangeIsOk;
- Batt_Stat=batteryIsOk(25, 70, 0.7);
+ int (*Temperature_Check)(float)=temperatureRangeIsOk;
+ Batt_Stat=batteryIsOk((Temperature_Check)(25), 70, 0.7);
  assert(Batt_Stat==1);
- Batt_Stat=batteryIsOk(50, 85, 0);
+ Batt_Stat=batteryIsOk((Temperature_Check)(50), 85, 0);
  assert(Batt_Stat==1);
  }
